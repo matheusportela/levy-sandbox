@@ -1,0 +1,12 @@
+.plot_div
+{
+    width: 75%;
+    height: 100vh;
+    float: left;
+}
+.settings_div
+{
+    width: 25%;
+    height: 100vh;
+    float: right;
+}
