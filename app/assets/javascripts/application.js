@@ -18,3 +18,4 @@
 // = require bootstrap
 // = require pagination
 // = require dropdown_menu
+// = require game_of_life

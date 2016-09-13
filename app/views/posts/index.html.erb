@@ -2,48 +2,47 @@
 <html>
 
 <head>
- <meta charset="utf-8">
- <%= stylesheet_link_tag "css/style.css" %>
- <title>Senses UnB</title>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag "css/main.css", "css/blog.css" %>
+  <title>Blog | Levy</title>
 </head>
-
-<p id="back-top">
-<a href="#top"><span></span>voltar ao topo</a>
-<p>
 
 <body>
   <%= javascript_include_tag "application" %>
-   <div id="menu">
-    <div class="wrapper">
-      <div class="navigation">
-      <a href="/#about">quem somos</a>
-      <a href="/#team">nossa equipe</a>
-      <a href="/#join">como participar</a>
-      <a href="/#contact">contato</a>
+
+  <div class='header'><%= render "layouts/header" %></div>
+
+    <p id="back-top">
+    <a href="#top"><span></span>voltar ao topo</a>
+    <p>
+
+    <div class='wrapper'>
+    <div class="welcome">
       <% if logged_in? %>
-      <a> LOGGED</a>
+        <p id="new-post">
+          <a href='posts/new'><span></span>novo post</a>
+        </p>
       <% end %>
-      </div>
-    </div>
-  </div> 
-
-  <div class="welcome">
-    <% if logged_in? %>
-      <p id="new-post">
-        <a href='posts/new'><span></span>novo post</a>
-      </p>
-    <% end %>
-  </div>
-
-  <div class="wrapper">
-    <div class="posts-index" id="posts-index">
-      <%= render @posts %>
     </div>
 
-    <% if @posts.next_page %>
-      <div id="infinite-scrolling">
-        <%= will_paginate %>
+    <header class="post-header">
+      <h1 class="post-title">blog</h1>
+    </header>
+
+    <div class="wrapper">
+      <div class="posts-index" id="posts-index">
+        <%= render @posts %>
       </div>
-    <% end %>
-  </div>
+
+      <% if @posts.next_page %>
+        <div id="infinite-scrolling">
+          <%= will_paginate %>
+        </div>
+      <% end %>
+    </div>
 </body>
+
+<body>
+<footer><%= render "layouts/footer" %></footer>
+
+</html>

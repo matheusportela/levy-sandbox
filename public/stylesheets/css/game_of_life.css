@@ -1,0 +1,130 @@
+/* Intro div*/
+.intro-class
+{
+    text-align: center;
+}
+
+body
+{
+    background-color: #FFFFFF;
+}
+
+/* Game div */
+:root
+{
+    --dead-color: #FFD8D8;
+    --alive-color: #FF8686;
+}
+.game-class
+{
+    align: center;
+}
+
+/* Round grid */
+.round-grid
+{
+    margin: 0vw auto;
+    border-collapse: separate;
+    border-spacing: 0.00vw;
+}
+.round-grid td
+{
+    background-clip: padding-box;
+    border-radius: 5vw;
+    background-color: var(--dead-color);
+    color: var(--dead-color);
+    border: 0.09vw solid var(--dead-color);
+}
+.round-grid td.clicked
+{
+    border-color: var(--alive-color);
+    background-color: var(--alive-color);
+}
+
+/* Square grid */
+.square-grid
+{
+    margin: 0vw auto;
+    border-collapse: collapse;
+    border-spacing: 0.08vw;
+}
+.square-grid td
+{
+    width: 0.2vw;
+    height: 0.2vw;
+    border: 0.10vw solid var(--dead-color);
+}
+.square-grid td.clicked
+{
+    background-color: var(--alive-color);
+}
+
+/* Settings div*/
+.settings_div
+{
+    position: relative;
+    overflow: hidden;
+    width: all;
+    height: 40vw;
+}
+.action-buttons-div
+{
+    text-align: right;
+    float: right;
+    width: 50%;
+    display: inline;
+    line-height: 4px;
+}
+.pattern-buttons-div
+{
+    text-align: left;
+    float: left;
+    width: 50%;
+    line-height: 4px;
+}
+.nice-buttons
+{
+    background-color: #3E8181;
+    color: white;
+    padding: 1vw;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: auto;
+}
+.hidden-nice-buttons
+{
+    background-color: #7DA234;
+    color: white;
+    padding: 1vw;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    display: auto;
+}
+.nice-buttons:hover, .nice-buttons:focus
+{
+    background-color: #216868;
+}
+.nice-buttons:disabled
+{
+    background-color: #97C2C2;
+    cursor: default;
+}
+.buttons-hidden-view
+{
+    position: relative;
+    text-align: center;
+    align-content: left;
+    display: none;
+    line-height: 4px;
+}
+
+/* Credits div*/
+.credits-class
+{
+    position: relative;
+    font-size: 80%;
+    text-align: center;
+    font-style: italic;
+}
