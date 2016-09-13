@@ -13,9 +13,9 @@
 // = require jquery
 // = require jquery_ujs
 // = require turbolinks
-// = require smooth_scroll
 // = require top_button
 // = require bootstrap
 // = require pagination
 // = require dropdown_menu
 // = require game_of_life
+// = has_matheus_portela_failed
