@@ -1,0 +1,24 @@
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <%= javascript_include_tag "application" %>
+  <div class="wrapper">
+      <a class="site-title" href="/">levy's playground</a>
+      <nav class="site-nav">
+        <div class="trigger">
+              <a class="page-link" href="/who-are-you/">about me</a>
+              <a class="page-link" href="/blog/">posts</a>
+              <a class="page-link" href="/what-have-you-done/">projects</a>
+          <div class="dropdown">
+        <button onmouseenter="openDropDown()" class="dropbtn">sandbox</button>
+        <div id="dropdown-div" class="dropdown-content">
+          <a class="page-link" href="/game-of-life"> game of life </a>
+          <a class="page-link" href="/has-matheus-portela-failed-already">has matheus portela failed?</a>
+              </div>
+            </div>
+        </div>
+      </nav>
+    </div>
+    <br>
+</body>
