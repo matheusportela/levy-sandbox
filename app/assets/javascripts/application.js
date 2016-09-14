@@ -16,4 +16,3 @@
 // = require top_button
 // = require bootstrap
 // = require pagination
-// = require dropdown_menu
