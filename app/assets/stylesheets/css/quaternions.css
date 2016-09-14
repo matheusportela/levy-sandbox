@@ -1,12 +1,54 @@
-.plot_div
+.plot-div
 {
-    width: 75%;
-    height: 100vh;
-    float: left;
+    height: 60vh;
 }
-.settings_div
+.settings-div
 {
-    width: 25%;
     height: 100vh;
-    float: right;
+    width: 30vw;
+    position: fixed;
+    top: 15vh;
+  	margin-left: 75vw;
+}
+.submit-div
+{
+	width: 80%;
+	height: 4vh;
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+}
+.settings-hr
+{
+	width: 10vw; 
+}
+.coordinates
+{
+	width: 30%;
+}
+.nice-buttons
+{
+    background-color: #3E8181;
+    color: white;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    display: auto;
+}
+.nice-buttons:hover, .nice-buttons:focus
+{
+    background-color: #216868;
+}
+.nice-buttons:disabled
+{
+    background-color: #97C2C2;
+    cursor: default;
+}
+.buttons-hidden-view
+{
+    position: relative;
+    text-align: center;
+    align-content: left;
+    display: none;
+    line-height: 4px;
 }

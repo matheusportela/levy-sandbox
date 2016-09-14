@@ -4,29 +4,69 @@
 <head>
   <meta charset="utf-8">
   <%= stylesheet_link_tag "css/main.css", "css/quaternions.css" %>
-  <title>Quaternions | Levy</title>
+  <title>test | Levy</title>
 </head>
 
 <body>
   <div class='header'><%= render "layouts/header" %></div>
   <script src="/assets/javascripts/plotly-latest.min.js"></script>
+  <script src="/assets/javascripts/three.js"></script>
   <script src="/assets/javascripts/quaternions.js"></script>
 
   <div class='wrapper'>
     <header class="post-header">
-      <h1 class="post-title">quaternions</h1>
+      <h1 class="post-title">test</h1>
     </header>
   
     <div class="post-content">
-      <div class="plot_div" id="plot_div"></div>
-      <div class="settings_div" id="menu">
-        <form action="action_page.php">
-          x: <input type="text" name="x_value" value="1"><br>
-          y: <input type="text" name="y_value" value="1"><br>
-          z: <input type="text" name="z_value" value="1"><br>
-          <button type="button" id="angle_submit" onclick="testing()">submit!</button>
-        </form>
+      <div class="plot-div" id="plot_div"></div>
+    </div>
+  </div>
+
+  <div class="settings-div" id="menu">
+    Original vector<br>
+    <div class="submenu-div">
+      (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
+      <br>
+      x<sub>1</sub> <input class='coordinates' type="text" id="original_x1" value="0"><br>
+      y<sub>1</sub> <input class='coordinates' type="text" id="original_y1" value="1"><br>
+      z<sub>1</sub> <input class='coordinates' type="text" id="original_z1" value="0"><br>
+    </div>
+    <div class="submit-div">
+      <button class="nice-buttons" id="origin_vector_submit" onclick="originVectorUpdate()">submit!</button>
+    </div>
+    <hr class="settings-hr"><br>
+    <div class="submenu-div">
+      Euler angles (degrees)<br>
+      &alpha; <input class='coordinates' type="text" id="euler_alpha" value="0"><br>
+      &beta; <input class='coordinates' type="text" id="euler_beta" value="0"><br>
+      &gamma; <input class='coordinates' type="text" id="euler_gamma" value="0"><br>
+    </div>
+    <div class="submit-div">
+      <button class="nice-buttons" id="euler_angle_submit" onclick="eulerAngleUpdate()">submit!</button>
+    </div>
+    <hr class="settings-hr"><br>
+    <div class="submenu-div">
+      Quaternions<br>
+      w <input class='coordinates' type="text" id="quat_w" value="0"><br>
+      x <input class='coordinates' type="text" id="quat_x" value="0"><br>
+      y <input class='coordinates' type="text" id="quat_y" value="0"><br>
+      z <input class='coordinates' type="text" id="quat_z" value="0"><br>
+    </div>
+    <div class="submit-div">
+      <button class="nice-buttons" id="quaternions_submit" onclick="quaternionUpdate()">submit!</button>
+    </div>
+    <hr class="settings-hr"><br>
+    <div class="submenu-div">
+      Rotated vector<br>
+      (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
+      <br>
+      x<sub>1</sub> <input class='coordinates' type="text" id="rotated_x1" value="0"><br>
+      y<sub>1</sub> <input class='coordinates' type="text" id="rotated_y1" value="1"><br>
+      z<sub>1</sub> <input class='coordinates' type="text" id="rotated_z1" value="0"><br>
       </div>
+    <div class="submit-div">
+      <button class="nice-buttons" id="rotated_vector_submit" onclick="rotatedVectorUpdate()">submit!</button>
     </div>
   </div>
 
