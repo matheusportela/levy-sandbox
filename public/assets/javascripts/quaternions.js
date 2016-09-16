@@ -52,7 +52,14 @@ function eulerAngleUpdate()
   var euler = new THREE.Euler(alpha_value, beta_value, gamma_value, 'XYZ');
   var vector = new THREE.Vector3(x1.value, y1.value, z1.value);
   vector.applyEuler(euler);
+  
+  // Treat small values
+  vector.x = Math.abs(vector.x) < 0.1 ? 0 : vector.x;
+  vector.y = Math.abs(vector.y) < 0.1 ? 0 : vector.y;
+  vector.z = Math.abs(vector.z) < 0.1 ? 0 : vector.z;
+
   console.log(euler)
+  console.log(vector)
 
   // Update graph
   graph_div.data[1].x[1] = vector.x;
@@ -139,7 +146,21 @@ $(document).ready(function()
     x: [0, 0],
     y: [0, 1],
     z: [0, 0],
-    type: 'scatter3d'
+    type: 'scatter3d',
+    mode: 'lines',
+    line:
+    {
+      width: 6,
+      colorscale: "Viridis"
+    },
+    marker:
+    {
+      size: 3.5,
+      colorscale: "Greens",
+      cmin: -20,
+      cmax: 50
+    },
+    name: 'original'
   };
 
   var trace2 = 
@@ -147,12 +168,27 @@ $(document).ready(function()
     x: [0, 0],
     y: [0, 1],
     z: [0, 0],
-    type: 'scatter3d'
-  }
+    type: 'scatter3d',
+    mode: 'lines',
+    line:
+    {
+      width: 6,
+      colorscale: "Viridis"
+    },
+    marker:
+    {
+      size: 3.5,
+      colorscale: "Greens",
+      cmin: -20,
+      cmax: 50
+    },
+    name: 'rotated'
+  };
 
   var data = [trace1, trace2];
 
-  var layout = {
+  var layout =
+  {
     margin:
     {
       l: 0,
@@ -162,13 +198,6 @@ $(document).ready(function()
     },
     paper_bgcolor: 'rgba(0,0,0,0)',
     plot_bgcolor: 'rgba(0,0,0,0)',
-    showGrid: false,
-    cameraPosition:
-    {
-      horizontal: .4,
-      vertical: .4,
-      distance: 1,
-    },
     scene:
     {
       aspectmode: "manual",
@@ -190,9 +219,111 @@ $(document).ready(function()
       {
         nticks: 5,
         range: [-3.1, 3.1]
-      }
-    },
+      },
+      camera:
+      {
+        center:
+        {
+            x: 0, 
+            y: 0, 
+            z: 0
+        }, 
+        eye:
+        {
+            x: 1.2885447206631766, 
+            y: -1.3566671403589505, 
+            z: 0.3440047239455235
+        }, 
+        up:
+        {
+            x: 0, 
+            y: 0, 
+            z: 1
+        }
+    }
+    }
   };
 
   Plotly.newPlot('plot_div', data, layout);
 });
+
+// Plotly.newPlot("8e43f415-64a0-474a-909d-02174c717b20",
+//   [
+//     {
+//       "showlegend": true,
+//       "cmax": 1,
+//       "uid": "90d157",
+//       "zsrc": "lucasdelevy:0:936e3c",
+//       "ysrc": "lucasdelevy:0:9f0614",
+//       "xsrc": "lucasdelevy:0:f2abf4",
+//        "name": "Teste1",
+//        "marker": {"symbol": "*",
+//        "sizeref": 0},
+//        "mode": "lines+markers",
+//        "y": ["1",
+//        "0",
+//        ""],
+//        "x": ["0",
+//        "0",
+//         ""],
+//         "z": ["0",
+//         "0"],
+//         "type": "scatter3d",
+//         "cmin": 0
+//       },
+//       {
+//         "uid": "09acc6",
+//         "zsrc": "lucasdelevy:0:342c04",
+//         "ysrc": "lucasdelevy:0:1efad1",
+//         "xsrc": "lucasdelevy:0:f46851",
+//         "visible": true,
+//         "hoverinfo": "x+y+z+name",
+//         "y":
+//         [
+//           "0",
+//           "0"
+//         ],
+//         "x":
+//         [
+//           "1",
+//           "0"
+//         ],
+//           "z":
+//         [
+//           "1",
+//           "0"
+//         ],
+//         "type": "scatter3d",
+//         "name": "Teste0"
+//       }
+//     ],
+//     {
+//       "autosize": true,
+//       "yaxis": {"type": "linear",
+//       "title": "B"},
+//       "title": "no",
+//       "scene": {"aspectratio": {"y": 1,
+//       "x": 1,
+//       "z": 1},
+//       "camera": {"eye": {"y": 1.064269242905534,
+//    "x": 1.6361025817119814,
+//             "z": 0.6242873817508187},
+//             "up": {"y": 0,
+//             "x": 0,
+//             "z": 1},
+//             "center": {"y": 0,
+//             "x": 0,
+//             "z": 0}},
+//             "dragmode": "turntable"},
+//             "height": 842.875,
+//             "width": 1500,
+//              "zaxis": {"title": "C"},
+//              "xaxis": {"type": "linear",
+//              "title": "A"},
+//              "hovermode": "closest",
+//              "showlegend": true,
+//              "legend": {"yanchor": "middle",
+//              "traceorder": "normal",
+//               "xanchor": "left"}},
+//               {"linkText": "Export to plot.ly",
+//               "showLink": true})

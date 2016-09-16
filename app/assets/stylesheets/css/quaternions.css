@@ -1,14 +1,23 @@
 .plot-div
 {
     height: 60vh;
+    z-index: 0;
 }
-.settings-div
+.settings-div-left
 {
     height: 100vh;
-    width: 30vw;
+    width: 15vw;
     position: fixed;
-    top: 15vh;
-  	margin-left: 75vw;
+    top: 20vh;
+  	margin-left: 15vw;
+}
+.settings-div-right
+{
+    height: 100vh;
+    width: 15vw;
+    position: fixed;
+    top: 20vh;
+    margin-left: 75vw;
 }
 .submit-div
 {
