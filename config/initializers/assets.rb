@@ -15,6 +15,8 @@ Rails.application.config.assets.precompile += %w( css/welcome.css )
 Rails.application.config.assets.precompile += %w( css/about_me.css )
 Rails.application.config.assets.precompile += %w( css/projects.css )
 Rails.application.config.assets.precompile += %w( css/blog.css )
+Rails.application.config.assets.precompile += %w( css/posts.css )
+Rails.application.config.assets.precompile += %w( css/comments.css )
 Rails.application.config.assets.precompile += %w( css/game_of_life.css )
 Rails.application.config.assets.precompile += %w( css/quaternions.css )
 

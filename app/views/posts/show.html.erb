@@ -1,44 +1,58 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html>
 
-<p>
-  <h1><%= @post.title %></h1>
-</p>
+<head>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag "css/main.css", "css/posts.css", "css/comments.css" %>
+  <title><%= @post.title %></title>
+</head>
 
-<p>
-  <%= @post.body.html_safe %>
-</p>
+<body>
+  <div class='header'><%= render "layouts/header" %></div>
+  <div class='wrapper'>
+    <header class="post-header">
+      <h1 class="post-title"><%= @post.title %></h1>
+    </header>
+    <div class="post-content">
+    <%= @post.body.html_safe %>
 
-<hline>
+    <td><%= @post.body %></td>
 
-<tr class="post">
-  <td><%= @post.title %></td>
-  <td><%= @post.body %></td>
-  <td><%= link_to 'Show', @post %></td>
-</tr>
+    <br>
+    <br>
+    <hr>
 
-<h3>Comments</h3>
-<div id="comments">
-    <%= render :partial => @post.comments.reverse %>
-</div>
+    <h3>comments</h3>
+    <div id="comments">
+        <%= render :partial => @post.comments.reverse %>
+    </div>
 
-<%= form_for([@post, Comment.new], remote: true) do |f| %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_area :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <hr>
+    <br>
 
-<br><br>
-<% if logged_in? %>
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<% end %>
-<%= link_to 'Back', posts_path %>
+    <%= form_for([@post, Comment.new], remote: true) do |f| %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="field">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :comment %>
+        <%= f.text_area :body, size: '60x12' %>
+      </div>
+      <div class="field">
+        <%= f.submit %>
+      </div>
+    <% end %>
+
+    <br><br>
+    <% if logged_in? %>
+    <%= link_to 'Edit', edit_post_path(@post) %> |
+    <%= link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <% end %>
+    <%= link_to 'Back', posts_path %>
+</body>
+
+<footer><%= render "layouts/footer" %></footer>
+
+</html>

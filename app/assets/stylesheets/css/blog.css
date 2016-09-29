@@ -25,15 +25,15 @@
 
 /* arrow icon (span tag) */
 #back-top span {
-  width: 6vw;
-  height: 6vw;
+  width: 5vw;
+  height: 5vw;
   display: block;
-  margin-bottom: 1vh;
-  background: rgba(149, 36, 39, 0.6) url(../assets/senses-logo-no-text.png) no-repeat center center;
-  background-size: 6vw;
+  margin-bottom: 4vh;
+  background: rgba(149, 36, 39, 0.6) url(/assets/top.jpg) no-repeat center center;
+  background-size: 13vw;
 
   /* rounded corners */
-  -webkit-border-radius: 50px;
+  -webkit-border-radius: 40px;
   -moz-border-radius: 50vw;
   border-radius: 50vw;
 
