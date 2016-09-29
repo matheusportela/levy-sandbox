@@ -23,52 +23,65 @@
     </div>
   </div>
 
-  <div class="settings-div-left" id="menu">
+  <div class="settings-div-left">
     Original vector<br>
-    <div class="submenu-div">
-      (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
-      <br>
-      x<sub>1</sub> <input class='coordinates' type="text" id="original_x1" value="0"><br>
-      y<sub>1</sub> <input class='coordinates' type="text" id="original_y1" value="1"><br>
-      z<sub>1</sub> <input class='coordinates' type="text" id="original_z1" value="0"><br>
-    </div>
-    <div class="submit-div">
-      <button class="nice-buttons" id="origin_vector_submit" onclick="originVectorUpdate()">submit!</button>
-    </div>
-    <hr class="settings-hr"><br>
-    <div class="submenu-div">
-      Euler angles (degrees)<br>
-      &alpha; <input class='coordinates' type="text" id="euler_alpha" value="0"><br>
-      &beta; <input class='coordinates' type="text" id="euler_beta" value="0"><br>
-      &gamma; <input class='coordinates' type="text" id="euler_gamma" value="0"><br>
-    </div>
-    <div class="submit-div">
-      <button class="nice-buttons" id="euler_angle_submit" onclick="eulerAngleUpdate()">submit!</button>
-    </div>
-  </div>
-  <div class="settings-div-right">
-    <div class="submenu-div">
-      Quaternions<br>
-      w <input class='coordinates' type="text" id="quat_w" value="0"><br>
-      x <input class='coordinates' type="text" id="quat_x" value="0"><br>
-      y <input class='coordinates' type="text" id="quat_y" value="0"><br>
-      z <input class='coordinates' type="text" id="quat_z" value="0"><br>
-    </div>
-    <div class="submit-div">
-      <button class="nice-buttons" id="quaternions_submit" onclick="quaternionUpdate()">submit!</button>
-    </div>
-    <hr class="settings-hr"><br>
-    <div class="submenu-div">
-      Rotated vector<br>
-      (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
-      <br>
-      x<sub>1</sub> <input class='coordinates' type="text" id="rotated_x1" value="0"><br>
-      y<sub>1</sub> <input class='coordinates' type="text" id="rotated_y1" value="1"><br>
-      z<sub>1</sub> <input class='coordinates' type="text" id="rotated_z1" value="0"><br>
+    <form id='original_vector_form'>
+      <div class="submenu-div">
+        (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
+        <br>
+        x<sub>1</sub> <input class='coordinates' type="text" id="original_x1" value="0"><br>
+        y<sub>1</sub> <input class='coordinates' type="text" id="original_y1" value="1"><br>
+        z<sub>1</sub> <input class='coordinates' type="text" id="original_z1" value="0"><br>
       </div>
-    <div class="submit-div">
-      <button class="nice-buttons" id="rotated_vector_submit" onclick="rotatedVectorUpdate()">submit!</button>
-    </div>
+      <div class="submit-div">
+        <button class="nice-buttons" type='submit' id="origin_vector_submit" onclick="originVectorUpdate()">submit!</button>
+      </div>
+    </form>
+
+    <hr class="settings-hr"><br>
+
+    Euler angles (degrees)<br>
+    <form id='euler_angles_form'>
+      <div class="submenu-div">
+        &alpha; <input class='coordinates' type="text" id="euler_alpha" value="0"><br>
+        &beta; <input class='coordinates' type="text" id="euler_beta" value="0"><br>
+        &gamma; <input class='coordinates' type="text" id="euler_gamma" value="0"><br>
+      </div>
+      <div class="submit-div">
+        <button class="nice-buttons" id="euler_angle_submit" onclick="eulerAngleUpdate()">submit!</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="settings-div-right">
+    Quaternions<br>
+    <form id='quaternions_form'>
+      <div class="submenu-div">
+        w <input class='coordinates' type="text" id="quat_w" value="0"><br>
+        x <input class='coordinates' type="text" id="quat_x" value="0"><br>
+        y <input class='coordinates' type="text" id="quat_y" value="0"><br>
+        z <input class='coordinates' type="text" id="quat_z" value="0"><br>
+      </div>
+      <div class="submit-div">
+        <button class="nice-buttons" id="quaternions_submit" onclick="quaternionUpdate()">submit!</button>
+      </div>
+    </form>
+
+    <hr class="settings-hr"><br>
+
+    Rotated vector<br>
+    <form id='rotated_vector_form'>
+      <div class="submenu-div">
+        (x<sub>0</sub>,y<sub>0</sub>,z<sub>0</sub>) = (0,0,0)
+        <br>
+        x<sub>1</sub> <input class='coordinates' type="text" id="rotated_x1" value="0"><br>
+        y<sub>1</sub> <input class='coordinates' type="text" id="rotated_y1" value="1"><br>
+        z<sub>1</sub> <input class='coordinates' type="text" id="rotated_z1" value="0"><br>
+        </div>
+      <div class="submit-div">
+        <button class="nice-buttons" id="rotated_vector_submit" onclick="rotatedVectorUpdate()">submit!</button>
+      </div>
+    </form>
   </div>
 
 </body>

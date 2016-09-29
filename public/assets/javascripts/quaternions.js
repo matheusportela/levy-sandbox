@@ -54,12 +54,9 @@ function eulerAngleUpdate()
   vector.applyEuler(euler);
   
   // Treat small values
-  vector.x = Math.abs(vector.x) < 0.1 ? 0 : vector.x;
-  vector.y = Math.abs(vector.y) < 0.1 ? 0 : vector.y;
-  vector.z = Math.abs(vector.z) < 0.1 ? 0 : vector.z;
-
-  console.log(euler)
-  console.log(vector)
+  vector.x = Math.abs(vector.x) < 0.001 ? 0 : vector.x;
+  vector.y = Math.abs(vector.y) < 0.001 ? 0 : vector.y;
+  vector.z = Math.abs(vector.z) < 0.001 ? 0 : vector.z;
 
   // Update graph
   graph_div.data[1].x[1] = vector.x;
@@ -111,25 +108,15 @@ function quaternionUpdate()
 function rotatedVectorUpdate()
 {
   graph_div  = document.getElementById('plot_div');
-  rotated_x0 = document.getElementById('rotated_x0').value;
-  rotated_y0 = document.getElementById('rotated_y0').value;
-  rotated_z0 = document.getElementById('rotated_z0').value;
   rotated_x1 = document.getElementById('rotated_x1').value;
   rotated_y1 = document.getElementById('rotated_y1').value;
   rotated_z1 = document.getElementById('rotated_z1').value;
 
   console.log(
-    rotated_x0,
-    rotated_y0,
-    rotated_z0);
-  console.log(
     rotated_x1,
     rotated_y1,
     rotated_z1);
 
-  graph_div.data[1].x[0] = rotated_x0;
-  graph_div.data[1].y[0] = rotated_y0;
-  graph_div.data[1].z[0] = rotated_z0;
   graph_div.data[1].x[1] = rotated_x1;
   graph_div.data[1].y[1] = rotated_y1;
   graph_div.data[1].z[1] = rotated_z1;
@@ -141,6 +128,36 @@ function rotatedVectorUpdate()
 
 $(document).ready(function()
 {
+  // Preventing form submission to reload page
+  $("#original_vector_form").submit(
+    function(e)
+    {
+      e.preventDefault();
+    }
+  );
+
+  $("#euler_angles_form").submit(
+    function(e)
+    {
+      e.preventDefault();
+    }
+  );
+
+  $("#quaternions_form").submit(
+    function(e)
+    {
+      e.preventDefault();
+    }
+  );
+
+  $("#rotated_vector_form").submit(
+    function(e)
+    {
+      e.preventDefault();
+    }
+  );
+
+  // Initial plot
   var trace1 =
   {
     x: [0, 0],
