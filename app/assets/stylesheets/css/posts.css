@@ -24,3 +24,55 @@ pre.bash
 {
 	border: 0;
 }
+
+/* Top button */
+#back-top
+{
+  position: fixed;
+  bottom: 30px;
+  margin-left: 30px;
+}
+
+#back-top a
+{
+  width: 108px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Open Sans;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover
+{
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span
+{
+  width: 5vw;
+  height: 5vw;
+  display: block;
+  background: rgba(149, 36, 39, 0.0) url(/assets/top.svg) no-repeat center center;
+  background-size: 4vw 4vw;
+
+  /* rounded corners */
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 50vw;
+  border-radius: 50vw;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span
+{
+  background-color: rgba(149, 36, 39, 0.3);
+}
