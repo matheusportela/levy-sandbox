@@ -1,0 +1,148 @@
+Hello! Thanks for passing by! 
+<br>
+<br>
+I recently started a project for a discipline with the sole purpose of <b>controlling a cockroach's movement</b> using neurostimulation and a motion capture device. I went after <b>BackyardBrain</b>'s RoboRoach since it is a reference in terms of hardware <b>lightness</b> and project <b>robustness</b>. Also they have some really nice video tutorials and resources on their <a href='https://backyardbrains.com/'><b>website</b></a> (be sure to check them!)
+<br>
+<br>
+Since I am using <a href='http://www.ndigital.com/medical/products/polaris-family/'><b>Polaris Spectra</b></a>'s motion capture setup, I thought it would be easier to implement it all using <b>Python</b> (and turns out it was). I tried to use it in Windows or Mac, but ran into several problems since RoboRoach's communication protocol is based on <b>GATT</b> (Generic Attribute Profile) -- because of the module used, <a href='http://www.blueradios.com/hardware_LE4.0-S2.htm'><b>Bluetooth 4.0 (Low Energy)</b></a>, which is pretty recent, meaning few people implemented stable libraries on it. I had no choice but to work on <b>Linux</b> (Ubuntu 14.0) using a <b>Bluetooth 4.0 dongle</b> (something like <a href='http://www.amazon.com/Kinivo-BTD-400-Bluetooth-4-0-adapter/dp/B007Q45EF4/ref=sr_1_1?ie=UTF8&qid=1433342734&sr=8-1&keywords=bluetooth+4.0+dongle'><b>this</b></a>). Well, let's cut to the chase and start this tutorial:
+
+<h1> We'll first make sure everything is installed</h1>
+Python's <code class=bash>gattlib</code> is the real star of this tutorial. In order to install it, we will follow <a href='https://bitbucket.org/OscarAcena/pygattlib'><b>their own suggested procedure</b></a>. First type this into the terminal:
+
+<pre class=bash><code class=bash>$ sudo nano /etc/apt/source.list</code></pre>
+
+Then add <code class=bash>deb http://babel.esi.uclm.es/arco sid main</code> to the end of the file. Finally:
+
+<pre class=bash><code class=bash>$ sudo apt-get update</code></pre>
+
+<div class=box>
+<h2>In case this did not work...</h2>
+If the error was:
+<pre class=bash><code class=bash>... Fetched 1'931 kB in 4s (448 kB/s)
+Reading package lists... Done
+W: GPG error: http://babel.esi.uclm.es sid
+InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E50C***...</code></pre><pre class=bash>
+Try this:
+<code class=bash>$ wget -qO - http://babel.esi.uclm.es/arco/key.asc | sudo apt-key add -</code></pre>
+And thus I hope it finally worked.
+</div>
+<br>
+
+Now we can install it: 
+<pre class=bash><code class=bash>$ sudo apt-get install python3-gattlib python-gattlib</code></pre>
+
+Notice I am installing it in <code class=bash>python3</code> as well as in <code class=bash>python</code> — just in case.
+
+<h2>Let's try some examples!</h2>
+
+You can use the following codes in order to test it:
+
+<pre class=bash><code class=bash>$ sudo python discovery.py</code></pre>
+
+<pre class='prettyprint linenums lang-py'>from gattlib import DiscoveryService
+service = DiscoveryService('hci0') devices = service.discover(2)
+for address, name in devices.items():
+print('name: {}, address: {}'.format(name, address))</code></pre>
+
+Or:
+<pre class=bash><code class=bash>$ sudo python read_data_assync.py</code></pre>
+<pre class='prettyprint linenums lang-py'>from gattlib import GATTRequester, GATTResponse
+import time
+
+req = GATTRequester('90:59:AF:14:08:E8')
+response = GATTResponse()
+
+req.read_by_handle_async(0x15, response)
+while not response.received():
+time.sleep(0.1)
+
+steps = response.received()[0]
+print steps.encode('hex')
+
+while not response.received():
+time.sleep(0.1)
+
+steps = response.received()[0]
+print steps.encode('hex')
+</pre>
+
+<h2>Exploring RoboRoach!</h2>
+
+If you are familiar with the <b>GATT protocol</b>, you probably now about <b>services</b>, <b>characteristics</b>, <b>attributes</b> and so on. (If you don't, it doesn't hurt to learn a bit about it: <a href='https://developer.android.com/reference/android/bluetooth/BluetoothGatt.html'><b>here</b></a> and <a href='https://learn.adafruit.com/introduction-to-bluetooth-low-energy/gatt'><b>here</b></a> will probably be enough.) So what we will do now is to <b>explore that organization within RoboRoach</b>. We will use <code class=bash>hcitool</code>, <code class=bash>hciconfig</code> and <code class=bash>gatttool</code>, so we have to first make sure all is installed.
+<pre class=bash><code class=bash>$ hcitool -v</code></pre>
+<pre class=bash><code class=bash>$ hciconfig -v</code></pre>
+<pre class=bash><code class=bash>$ gattool -v</code></pre>
+At this point, what we will do is follow something like <a href='http://blog.firszt.eu/index.php?post/2015/02/08/Bluetooth-BLE%2C-gatttool-and-%28almost%29-all-those-numbers-....-explained'><b>this routine</b></a> with data from <a href='https://github.com/BackyardBrains/RoboRoach/blob/22bab8ef06a3f0a31e7d5b8e7aa8298ed8b0e90d/Firmware/TI/Source/roboroach_profile.h'><b>RoboRoach's GATT profile</b></a> designed in their GitHub's Repository.
+<br>
+After <b>plugging in your dongle</b> (which you probably have done already), find out its <b>name</b>:
+
+<pre class=bash><code class=bash>$ hciconfig</code></pre>
+
+You will see something like that: 
+
+<pre class=bash><code class=bash>hci0: Type: BR/EDR Bus: USB<br>BD Address: 5C:F3:70:68:BF:97 ACL MTU: 1021:8 SCO MTU: 64:1<br>UP RUNNING PSCAN<br>RX bytes:6842 acl:142 sco:0 events:380 errors:0<br>TX bytes:5352 acl:163 sco:0 commands:153 errors:0</code></pre>
+
+That is great, seems like my dongle is being called <code class=bash>hci0</code>. Let's make sure to remember this. Then we will do:
+
+<pre class=bash><code class=bash>$ sudo hciconfig hci0 up</code></pre>
+<pre class=bash><code class=bash>$ sudo hcitool -i hci0 lescan</code></pre>
+
+And, if we had not found out our RoboRoach's <b>MAC address</b> yet (as we could have, from our <code class=bash>discovery.py</code>), now it is definitely here:
+
+<pre class=bash><code class=bash>LE Scan ... 90:59:AF:14:08:E8 (unknown) 90:59:AF:14:08:E8 RoboRoach</code></pre>
+
+You can ctrl-c as soon as you see this so that the sweeping stops. And there it is -- <i>our board's MAC address</i>. Let's write it down as well. We will now use <code class=bash>gattool</code> so we can connect to the board using the terminal.
+
+<pre class=bash><code class=bash>$ sudo gatttool -i hci0 -b 90:59:AF:14:08:E8 -I</code></pre>
+
+It is interesting here to check <code class=bash>$ gattool -h</code> to understand what each flag means. We are almost inside RoboRoach, so let's connect!
+
+<pre class=bash><code class=bash>[ ][90:59:AF:14:08:E8][LE]> connect</code></pre>
+
+Do not forget to press the board's button so it is visible! At last, we are connected! Let's list all the services available:
+
+<code class=bash>[CON][90:59:AF:14:08:E8][LE]: primary</code>
+
+Something like this will be shown:
+
+<pre class=bash><code class=bash>
+[CON][90:59:AF:14:08:E8][LE]:
+attr handle: 0x0001, end grp handle: 0x000b uuid: 00001800-0000-1000-8000-00805f9b34fb
+attr handle: 0x000c, end grp handle: 0x000f uuid: 00001801-0000-1000-8000-00805f9b34fb
+attr handle: 0x0010, end grp handle: 0x0022 uuid: 0000180a-0000-1000-8000-00805f9b34fb
+attr handle: 0x0023, end grp handle: 0x0027 uuid: 0000180f-0000-1000-8000-00805f9b34fb
+attr handle: 0x0028, end grp handle: 0xffff uuid: 0000b2b0-0000-1000-8000-00805f9b34fb
+</code></pre>
+
+So here we have all <b>services</b>, <b>UUIDs</b> and the respective <b>handlers</b>. From RoboRoach's repository, we find:
+
+<pre class='prettyprint lang-c'>#define ROBOROACH_SERV_UUID 0xB2B0;</pre>
+
+But, wait, that's <b>the last UUID listed</b>! We will read its characteristics, then. 
+<pre class=bash><code class=bash>[CON][90:59:AF:14:08:E8][LE]> characteristics 0x0028 </code></pre>
+We do not use the UUID directly, but its handler! We will read: <pre class=bash><code class=bash>[CON][90:59:AF:14:08:E8][LE]><br>handle: 0x0029, char properties: 0x0a, char value handle: 0x002a, uuid: 0000b2b1-0000-1000-8000-00805f9b34fb<br>handle: 0x002c, char properties: 0x0a, char value handle: 0x002d, uuid: 0000b2b2-0000-1000-8000-00805f9b34fb<br>handle: 0x002f, char properties: 0x0a, char value handle: 0x0030, uuid: 0000b2b3-0000-1000-8000-00805f9b34fb<br>handle: 0x0032, char properties: 0x0a, char value handle: 0x0033, uuid: 0000b2b4-0000-1000-8000-00805f9b34fb<br>handle: 0x0035, char properties: 0x08, char value handle: 0x0036, uuid: 0000b2b5-0000-1000-8000-00805f9b34fb<br>handle: 0x0038, char properties: 0x08, char value handle: 0x0039, uuid: 0000b2b6-0000-1000-8000-00805f9b34fb<br>handle: 0x003b, char properties: 0x0a, char value handle: 0x003c, uuid: 0000b2b7-0000-1000-8000-00805f9b34fb<br>handle: 0x003e, char properties: 0x0a, char value handle: 0x003f, uuid: 0000b2b8-0000-1000-8000-00805f9b34fb<br>handle: 0x0041, char properties: 0x0a, char value handle: 0x0042, uuid: 0000b2b9-0000-1000-8000-00805f9b34fb<br>handle: 0x0044, char properties: 0x0a, char value handle: 0x0045, uuid: 0000b2ba-0000-1000-8000-00805f9b34fb<br>handle: 0x0047, char properties: 0x0a, char value handle: 0x0048, uuid: 0000b2bb-0000-1000-8000-00805f9b34fb<br>handle: 0x004a, char properties: 0x0a, char value handle: 0x004b, uuid: 0000b2bc-0000-1000-8000-00805f9b34fb<br>handle: 0x004d, char properties: 0x0a, char value handle: 0x004e, uuid: 0000b2bd-0000-1000-8000-00805f9b34fb</code></pre>
+
+Wow, that is a lot of UUIDs! Well, each one of this represent a <b>characteristic</b>, such as <i>turn right</i>, <i>turn left</i>, <i>frequency</i> or <i>pulse width</i>. Let's try to find which is *turn right*, then. From the repository:
+<br><br>
+<pre class='prettyprint lang-c'>#define ROBOROACH_CHAR_STIMULATE_LEFT_UUID 0xB2B5</pre>
+<br>
+
+Remember that, in order to turn right, you must stimulate the left electrode. There it is, the UUID we were looking for! Now we just have to <b>write on the characteristic's attribute</b> to make some effect on the system. A simple <code class=bash>1</code> might be enough.
+
+<pre class=bash><code class=bash>[CON][90:59:AF:14:08:E8][LE]> char-write-cmd 0x0036 0x1</code></pre>
+
+In other words, write <code class=bash>0x01</code> onto the characteristic whose handle is <code class=bash>0x0036</code>. You will notice <b>the left electrode just blinked</b>! Great, we are finally there, now we can mess with all characteristics whenever we want and need to! 
+
+<h2> But... how about Python?</h2>
+
+Well, once this is all settled, the Python code is pretty simple:
+<br>
+<pre class='prettyprint linenums lang-py'>from gattlib import GATTRequester 
+import time
+req = GATTRequester("90:59:AF:14:08:E8") 
+req.write_by_handle(0x0036, str(bytearray([1]))) # left
+time.sleep(1); 
+req.write_by_handle(0x0039, str(bytearray([1]))) # right
+</pre>
+
+Hope that helped! :-)

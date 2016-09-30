@@ -1,11 +1,13 @@
 /* Top button */
-#back-top {
+#back-top
+{
   position: fixed;
   bottom: 30px;
   margin-left: 30px;
 }
 
-#back-top a {
+#back-top a
+{
   width: 108px;
   display: block;
   text-align: center;
@@ -19,18 +21,19 @@
   -moz-transition: 1s;
   transition: 1s;
 }
-#back-top a:hover {
+#back-top a:hover
+{
   color: #000;
 }
 
 /* arrow icon (span tag) */
-#back-top span {
+#back-top span
+{
   width: 5vw;
   height: 5vw;
   display: block;
-  margin-bottom: 4vh;
-  background: rgba(149, 36, 39, 0.6) url(/assets/top.jpg) no-repeat center center;
-  background-size: 13vw;
+  background: rgba(149, 36, 39, 0.0) url(/assets/top.svg) no-repeat center center;
+  background-size: 4vw 4vw;
 
   /* rounded corners */
   -webkit-border-radius: 40px;
@@ -42,6 +45,7 @@
   -moz-transition: 1s;
   transition: 1s;
 }
-#back-top a:hover span {
-  background-color: rgba(149, 36, 39, 0.9);
+#back-top a:hover span
+{
+  background-color: rgba(149, 36, 39, 0.3);
 }
