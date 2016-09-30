@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <%= stylesheet_link_tag "css/main.css", "css/posts.css", "css/comments.css" %>
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   <title><%= @post.title %></title>
 </head>
 
@@ -15,9 +16,6 @@
     </header>
     <div class="post-content">
     <%= @post.body.html_safe %>
-
-    <td><%= @post.body %></td>
-
     <br>
     <br>
     <hr>
