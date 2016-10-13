@@ -13,4 +13,7 @@ class StaticPagesController < ApplicationController
 
   def quaternions
   end
+
+  def jlpt
+  end
 end
