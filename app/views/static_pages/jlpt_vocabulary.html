@@ -9,6 +9,7 @@
 
 <body>
   <div class='header'><%= render "layouts/header" %></div>
+  <script src="/assets/javascripts/jlpt_vocabulary.js"></script>
   <div class='wrapper'>
     <header class="post-header">
       <center><h1 class="post-title">JLPT</h1></center>
@@ -16,6 +17,10 @@
     <div>
       <center><h2>Kanji</h2></center>
     </div>
+    <div id='question'></div>
+    <input id='text_answer' class='answer_input' type="text">
+    <input id='submit_answer' class='answer_submit' type="submit" value="submit" onclick="submitAnswer()">
+    <div id='right_or_wrong'></div>
   </div>
 </body>
 <footer><%= render "layouts/footer" %></footer>
