@@ -18,13 +18,11 @@ class StaticPagesController < ApplicationController
   end
 
   def jlpt_vocabulary_get
-    @index = rand(1..2)
-    @jlpt_vocabulary_question = JlptVocabulary.find(@index)
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @jlpt_vocabulary_question }
+    index = rand(0..2)
+    jlpt_vocabulary = JlptVocabulary.where(level:params[:level])[index]
 
- end
+    respond_to do |format|
+      format.json { render :json => jlpt_vocabulary }
+    end
   end
 end

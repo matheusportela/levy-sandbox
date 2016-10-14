@@ -15,8 +15,13 @@
       <center><h1 class="post-title">JLPT</h1></center>
     </header>
     <div>
-      <center><h2>Kanji</h2></center>
+      <center><h2>Vocabulary</h2></center>
     </div>
+    <button id='n1_button' onclick="setLevel(1)">N1</button>
+    <button id='n2_button' onclick="setLevel(2)">N2</button>
+    <button id='n3_button' onclick="setLevel(3)">N3</button>
+    <button id='n4_button' onclick="setLevel(4)">N4</button>
+    <button id='n5_button' disabled onclick="setLevel(5)">N5</button>
     <div id='question'></div>
     <input id='text_answer' class='answer_input' type="text">
     <input id='submit_answer' class='answer_submit' type="submit" value="submit" onclick="submitAnswer()">
