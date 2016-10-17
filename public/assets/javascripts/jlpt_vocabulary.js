@@ -88,13 +88,13 @@ function submitAnswer()
 		}
 		else
 		{
-			mistakes_table.rows[i].cells[0].innerHTML = answers[i-1]
-  		mistakes_table.rows[i].cells[1].innerHTML = vocabulary_item[i-1].hiragana
+			mistakes_table.rows[i].cells[0].innerHTML = answers[i-1] == '' ? 'no answer' : answers[i-1]
+  			mistakes_table.rows[i].cells[1].innerHTML = vocabulary_item[i-1].hiragana
 
-  		if(mistakes.indexOf(i-1) >= 0)
-  			mistakes_table.rows[i].style.color = 'red';
-  		else
-  			mistakes_table.rows[i].style.color = 'blue';
+	  		if(mistakes.indexOf(i-1) >= 0)
+	  			mistakes_table.rows[i].style.color = '#AD3737';
+	  		else
+	  			mistakes_table.rows[i].style.color = '#7DA234';
 		}
   }
 

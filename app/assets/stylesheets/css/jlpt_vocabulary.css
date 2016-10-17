@@ -1,7 +1,16 @@
+:root
+{
+  --stronger-color: #AD3737;
+  --strong-color: #D76868;
+  --weak-color: #FFA3A3;
+  --weaker-color: #FFC6C6;
+  --background-color: #FFE5E5;
+}
+
 /* Buttons */
 .nice-buttons
 {
-  background-color: #851616;
+  background-color: var(--strong-color);
   color: white;
   padding: 1vw;
   font-size: 16px;
@@ -12,11 +21,11 @@
 }
 .nice-buttons:hover, .nice-buttons:focus
 {
-  background-color: #AE3939;
+  background-color: var(--weak-color);
 }
 .nice-buttons:disabled
 {
-  background-color: #FFC6C6;
+  background-color: var(--weaker-color);
   cursor: default;
 }
 
@@ -36,18 +45,19 @@
 /* Quiz structure */
 #question_num
 {
+  color: var(--stronger-color);
 	font-size: 2vw;
 	text-align: center;
 }
 #question_div
 {
 	font-size: 2vw;
-	color: #AD3737;
+	color: var(--strong-color);
 	text-align: center;
 	background-color: white;
 	border-style: solid;
 	border-radius: 5vw;
-	border-color: #AD3737;
+	border-color: var(--strong-color);
 	margin-top: 1vw;
 	margin-bottom: 1vw;
 }
@@ -60,7 +70,7 @@
 {
 	padding: 1vw;
 	border-radius: 1vw;
-	border-color: #AD3737;
+	border-color: var(--strong-color);
 	border-style: solid;
 }
 #submit_div
@@ -70,7 +80,7 @@
 #submit_answer
 {
 	align-items: center;
-	background-color: #851616;
+	background-color: var(--strong-color);
   color: white;
   padding: 1.5vw;
   font-size: 16px;
@@ -82,7 +92,7 @@
 }
 #submit_answer:hover, #submit_answer:focus
 {
-  background-color: #AE3939;
+  background-color: var(--stronger-color);
 }
 
 /* Direction buttons */
@@ -100,7 +110,7 @@
 }
 .direction-buttons
 {
-  background-color: #851616;
+  background-color: var(--strong-color);
   color: white;
   padding: 1vw;
   font-size: 16px;
@@ -112,11 +122,11 @@
 }
 .direction-buttons:hover, .direction-buttons:focus
 {
-  background-color: #AE3939;
+  background-color: var(--weak-color);
 }
 .direction-buttons:disabled
 {
-  background-color: #FFC6C6;
+  background-color: var(--weaker-color);
   cursor: default;
 }
 
@@ -126,6 +136,7 @@
   text-align: center;
   padding-top: 1vw;
   font-size: 2vw;
+  color: #7DA234;
 }
 table
 {
