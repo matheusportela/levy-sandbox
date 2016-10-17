@@ -22,10 +22,16 @@
     <button id='n3_button' onclick="setLevel(3)">N3</button>
     <button id='n4_button' onclick="setLevel(4)">N4</button>
     <button id='n5_button' disabled onclick="setLevel(5)">N5</button>
-    <div id='question'></div>
+    <div id='question_num'>1</div>
+    <div id='question_div'></div>
     <input id='text_answer' class='answer_input' type="text">
+    <br>
+    <button id='previous_button' disabled onclick="setQuestion(-1)">PREVIOUS</button>
+    <button id='next_button' onclick="setQuestion(1)">NEXT</button>
+    <br>
     <input id='submit_answer' class='answer_submit' type="submit" value="submit" onclick="submitAnswer()">
-    <div id='right_or_wrong'></div>
+    <div id='score_div'></div>
+    <div id='mistakes_div'></div>
   </div>
 </body>
 <footer><%= render "layouts/footer" %></footer>
