@@ -1,6 +1,6 @@
-var max_question_counter = 4 // number of questions - 1
+var max_question_counter = 9 // number of questions - 1
 var vocabulary_item // item queried from database
-var level = 5 // default level (N1 ~ N5)
+var n_level = 5 // default level (N1 ~ N5)
 var n_button // array of level buttons
 var question_counter = 0 // variable with current question - 1
 var previous_button // button to previous question
@@ -18,10 +18,16 @@ $(document).ready(function()
 {
 	question_div = document.getElementById('question_div')
 
-	$.getJSON("/jlpt/vocabulary/sample?level=5")
+	$.getJSON('/jlpt/vocabulary/sample',
+	{
+		level: 5,
+		num_questions: max_question_counter+1
+	})
 	.done(function(repos_data)
 	{
-		console.log(repos_data[0].kanji, repos_data[1].kanji, repos_data[2].kanji, repos_data[3].kanji, repos_data[4].kanji)
+		for (var idx = 0; idx < repos_data.length; idx++)
+			console.log(repos_data[idx].kanji)
+
     vocabulary_item = repos_data
     question_div.innerHTML = vocabulary_item[question_counter].kanji
 	})
@@ -127,18 +133,20 @@ function setQuestion(question_adder)
 
 function setLevel(set_level)
 {
-	n_button[level-1].disabled = false
+	n_button[n_level-1].disabled = false
+	n_level = set_level
+	n_button[set_level-1].disabled = true
 
-	level = set_level
-
-	n_button[level-1].disabled = true
-
-	var url = '/jlpt/vocabulary/sample?level='
-	url = url.concat(level)
-
-	$.getJSON(url)
+	$.getJSON('/jlpt/vocabulary/sample',
+	{
+		level: set_level,
+		num_questions: max_question_counter+1
+	})
 	.done(function(repos_data)
 	{
+		for (var idx = 0; idx < repos_data.length; idx++)
+			console.log(repos_data[idx].kanji)
+
 	    vocabulary_item = repos_data
 	    document.getElementById('question_div').innerHTML = vocabulary_item[question_counter].kanji
 	})

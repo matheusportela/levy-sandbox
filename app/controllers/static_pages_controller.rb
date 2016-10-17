@@ -18,7 +18,8 @@ class StaticPagesController < ApplicationController
   end
 
   def jlpt_vocabulary_get
-    jlpt_vocabulary = JlptVocabulary.where(level:params[:level]).sample(5)
+    num_questions = params[:num_questions].to_f
+    jlpt_vocabulary = JlptVocabulary.where(level:params[:level]).sample(num_questions)
 
     respond_to do |format|
       format.json { render :json => jlpt_vocabulary }
