@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <%= stylesheet_link_tag "css/main.css", "css/jlpt.css" %>
+  <title>JLPT! | Levy</title>
+</head>
+
+<body>
+  <div class='header'><%= render "layouts/header" %></div>
+  <div class='wrapper'>
+    <header class="post-header">
+      <center><h1 class="post-title">JLPT</h1></center>
+    </header>
+    <ui id='jlpt_buttons'>
+      <li><a href='/jlpt/vocabulary'><button id='vocabulary_button' class='nice-buttons'>vocabulary</button></a></li>
+      <li><a href='/jlpt/'><button id='grammar_button' class='nice-buttons'>grammar</button></a></li>
+      <li><a href='/jlpt/'><button id='kanji_button' class='nice-buttons'>kanji</button></a></li>
+    </div>
+  </div>
+</body>
+<footer><%= render "layouts/footer" %></footer>
+
+</html>

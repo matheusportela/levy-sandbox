@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <%= stylesheet_link_tag "css/main.css" %>
+  <%= stylesheet_link_tag "css/main.css", "css/jlpt_vocabulary.css" %>
   <title>JLPT! | Levy</title>
 </head>
 
@@ -15,21 +15,29 @@
       <center><h1 class="post-title">JLPT</h1></center>
     </header>
     <div>
-      <center><h2>Vocabulary</h2></center>
+      <center><h1>Vocabulary</h2></center>
     </div>
-    <button id='n1_button' onclick="setLevel(1)">N1</button>
-    <button id='n2_button' onclick="setLevel(2)">N2</button>
-    <button id='n3_button' onclick="setLevel(3)">N3</button>
-    <button id='n4_button' onclick="setLevel(4)">N4</button>
-    <button id='n5_button' disabled onclick="setLevel(5)">N5</button>
-    <div id='question_num'>1</div>
-    <div id='question_div'></div>
-    <input id='text_answer' class='answer_input' type="text">
-    <br>
-    <button id='previous_button' disabled onclick="setQuestion(-1)">PREVIOUS</button>
-    <button id='next_button' onclick="setQuestion(1)">NEXT</button>
-    <br>
-    <input id='submit_answer' class='answer_submit' type="submit" value="submit" onclick="submitAnswer()">
+    <div id='quiz_div'>
+      <ui id='jlpt_buttons'>
+      <li><button id='n1_button' class='nice-buttons' onclick='setLevel(1)'>N1</button></li>
+      <li><button id='n2_button' class='nice-buttons' onclick='setLevel(2)'>N2</button></li>
+      <li><button id='n3_button' class='nice-buttons' onclick='setLevel(3)'>N3</button></li>
+      <li><button id='n4_button' class='nice-buttons' onclick='setLevel(4)'>N4</button></li>
+      <li><button id='n5_button' class='nice-buttons' disabled onclick='setLevel(5)'>N5</button></li>
+      </ui>
+      <br>
+      <div id='question_num'>Question 01</div>
+      <div id='question_div'></div>
+      <input id='text_answer' autofocus class='answer_input' type="text">
+      <br>
+      <ui id='direction_buttons'>
+        <li><button id='previous_button' class='direction-buttons' disabled onclick="setQuestion(-1)">PREVIOUS</button></li>
+        <li><button id='next_button' class='direction-buttons' onclick="setQuestion(1)">NEXT</button></li>
+      </ui>
+      <div id='submit_div'>
+        <input id='submit_answer' class='answer_submit' type="submit" value="SUBMIT" onclick="submitAnswer()">
+      </div>
+    </div>
     <div id='score_div'></div>
     <div id='mistakes_div'></div>
   </div>

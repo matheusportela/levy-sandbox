@@ -1,0 +1,32 @@
+.nice-buttons
+{
+  background-color: #3E8181;
+  color: white;
+  padding: 1vw;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: auto;
+}
+.nice-buttons:hover, .nice-buttons:focus
+{
+  background-color: #216868;
+}
+.nice-buttons:disabled
+{
+  background-color: #97C2C2;
+  cursor: default;
+}
+
+#jlpt_buttons
+{
+ display: table;
+ width: 100%;
+ padding-top: 1vw;
+}
+
+#jlpt_buttons li
+{
+  display: table-cell;
+  text-align: center;
+}

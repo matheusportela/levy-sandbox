@@ -18,7 +18,7 @@ $(document).ready(function()
 {
 	question_div = document.getElementById('question_div')
 
-	$.getJSON("jlpt/sample?level=5")
+	$.getJSON("/jlpt/vocabulary/sample?level=5")
 	.done(function(repos_data)
 	{
 		console.log(repos_data[0].kanji, repos_data[1].kanji, repos_data[2].kanji, repos_data[3].kanji, repos_data[4].kanji)
@@ -42,8 +42,16 @@ $(document).ready(function()
 	mistakes_items = new Array()
 	mistakes_table = document.createElement('TABLE')
 	mistakes_table.setAttribute('width', '100%')
-  mistakes_table.setAttribute('border', '1')
+  	mistakes_table.setAttribute('border', '1')
 	table_is_shown = false;
+
+	document.getElementById("text_answer").addEventListener("keyup", 
+		function(event)
+		{
+  		event.preventDefault();
+  		if (event.keyCode == 13)
+    		document.getElementById("next_button").click();
+		});
 })
 
 function submitAnswer()
@@ -113,7 +121,7 @@ function setQuestion(question_adder)
 		next_button.disabled = true
 
 	// Changing question number and question itself
-	question_num_div.innerHTML = question_counter+1
+	question_num_div.innerHTML = 'Question 0'.concat(question_counter+1)
 	question_div.innerHTML = vocabulary_item[question_counter].kanji
 }
 
@@ -125,7 +133,7 @@ function setLevel(set_level)
 
 	n_button[level-1].disabled = true
 
-	var url = 'jlpt/sample?level='
+	var url = '/jlpt/vocabulary/sample?level='
 	url = url.concat(level)
 
 	$.getJSON(url)
