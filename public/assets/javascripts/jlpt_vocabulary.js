@@ -79,7 +79,9 @@ function submitAnswer()
 	var score = 0
 	for(i = 0; i <= max_question_counter; i++)
 	{
-		if(vocabulary_item[i].hiragana.indexOf(answers[i].trim()))
+		var find_string = (!answers[i].trim() ? 'no answer' : answers[i].trim())
+		console.log(find_string)
+		if(vocabulary_item[i].hiragana.indexOf(find_string) >= 0)
 			score++
 		else
 			mistakes.push(i)
@@ -87,7 +89,7 @@ function submitAnswer()
 
 	score_div.innerHTML = 'Final score: '.concat(score).concat('/').concat(max_question_counter+1)
 
-	// Updating table
+// Updating table
   for(var i = 0; i <= max_question_counter+1; i++)
   {
   	if(!table_is_shown)
