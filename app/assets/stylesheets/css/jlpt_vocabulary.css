@@ -155,3 +155,10 @@ tr:hover
 {
   background-color: #F5F5F5
 }
+
+/* Credits */
+#credits_div
+{
+  font-style: italic;
+  text-align: center;
+}
