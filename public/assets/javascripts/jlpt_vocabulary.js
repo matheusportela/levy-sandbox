@@ -33,6 +33,7 @@ $(document).ready(function()
 	})
 	.done(function(repos_data)
 	{
+		
 		for (var idx = 0; idx < repos_data.length; idx++)
 			console.log(repos_data[idx].kanji,repos_data[idx].hiragana)
 
