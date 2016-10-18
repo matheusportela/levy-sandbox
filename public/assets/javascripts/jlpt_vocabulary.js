@@ -34,7 +34,7 @@ $(document).ready(function()
 	.done(function(repos_data)
 	{
 		for (var idx = 0; idx < repos_data.length; idx++)
-			console.log(repos_data[idx].kanji)
+			console.log(repos_data[idx].kanji,repos_data[idx].hiragana)
 
     vocabulary_item = repos_data
     question_div.innerHTML = vocabulary_item[question_counter].kanji
@@ -78,12 +78,11 @@ function submitAnswer()
 	var score = 0
 	for(i = 0; i <= max_question_counter; i++)
 	{
-		if(vocabulary_item[i].hiragana == answers[i].trim())
+		if(vocabulary_item[i].hiragana.indexOf(answers[i].trim()))
 			score++
 		else
 			mistakes.push(i)
 	}
-	console.log(mistakes)
 
 	score_div.innerHTML = 'Final score: '.concat(score).concat('/').concat(max_question_counter+1)
 
@@ -106,12 +105,12 @@ function submitAnswer()
 		else
 		{
 			mistakes_table.rows[i].cells[0].innerHTML = answers[i-1].trim() == '' ? 'no answer' : answers[i-1]
-  			mistakes_table.rows[i].cells[1].innerHTML = vocabulary_item[i-1].hiragana
+			mistakes_table.rows[i].cells[1].innerHTML = vocabulary_item[i-1].hiragana.replace('[\"','').replace('\", \"',', ').replace('\"]', '')
 
-	  		if(mistakes.indexOf(i-1) >= 0)
-	  			mistakes_table.rows[i].style.color = '#AD3737';
-	  		else
-	  			mistakes_table.rows[i].style.color = '#7DA234';
+  		if(mistakes.indexOf(i-1) >= 0)
+  			mistakes_table.rows[i].style.color = '#AD3737';
+  		else
+  			mistakes_table.rows[i].style.color = '#7DA234';
 		}
   }
 
