@@ -10,6 +10,7 @@
 <body>
   <div class='header'><%= render "layouts/header" %></div>
   <script src="/assets/javascripts/jlpt_vocabulary.js"></script>
+  <script src="/assets/javascripts/wanakana.min.js"></script>
   <div class='wrapper'>
     <header class="post-header">
       <center><h1 class="post-title">JLPT</h1></center>
@@ -28,7 +29,7 @@
       <br>
       <div id='question_num'>Question 01</div>
       <div id='question_div'></div>
-      <input id='text_answer' autofocus class='answer_input' type="text">
+      <textarea id='text_answer' autofocus class='answer_input'></textarea>
       <br>
       <ui id='direction_buttons'>
         <li><button id='previous_button' class='direction-buttons' disabled onclick="setQuestion(-1)">PREVIOUS</button></li>

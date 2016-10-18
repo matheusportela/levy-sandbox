@@ -16,6 +16,14 @@ var table_is_shown
 
 $(document).ready(function()
 {
+	if(!String.prototype.trim)
+	{  
+		String.prototype.trim = function ()
+		{  
+	    		return this.replace(/^\s+|\s+$/g,'');  
+	  	};
+	} 
+
 	question_div = document.getElementById('question_div')
 
 	$.getJSON('/jlpt/vocabulary/sample',
@@ -40,7 +48,10 @@ $(document).ready(function()
 	previous_button = document.getElementById('previous_button')
 	next_button = document.getElementById('next_button')
 	question_num_div = document.getElementById('question_num')
+	
 	answer_div = document.getElementById('text_answer')
+	wanakana.bind(answer_div)
+
 	answers = new Array(max_question_counter+1).join('.').split('.')
 	score_div = document.getElementById('score_div')
 	mistakes_div = document.getElementById('mistakes_div')
@@ -67,7 +78,7 @@ function submitAnswer()
 	var score = 0
 	for(i = 0; i <= max_question_counter; i++)
 	{
-		if(vocabulary_item[i].hiragana == answers[i])
+		if(vocabulary_item[i].hiragana == answers[i].trim())
 			score++
 		else
 			mistakes.push(i)
@@ -94,7 +105,7 @@ function submitAnswer()
 		}
 		else
 		{
-			mistakes_table.rows[i].cells[0].innerHTML = answers[i-1] == '' ? 'no answer' : answers[i-1]
+			mistakes_table.rows[i].cells[0].innerHTML = answers[i-1].trim() == '' ? 'no answer' : answers[i-1]
   			mistakes_table.rows[i].cells[1].innerHTML = vocabulary_item[i-1].hiragana
 
 	  		if(mistakes.indexOf(i-1) >= 0)
