@@ -46,32 +46,44 @@
 #question_num
 {
   color: var(--stronger-color);
-	font-size: 2vw;
-	text-align: center;
+  font-size: 2vw;
+  text-align: center;
 }
 #question_div
 {
-	font-size: 2vw;
-	color: var(--strong-color);
-	text-align: center;
-	background-color: white;
-	border-style: solid;
-	border-radius: 5vw;
-	border-color: var(--strong-color);
-	margin-top: 1vw;
-	margin-bottom: 1vw;
+  font-size: 2vw;
+  color: var(--strong-color);
+  text-align: center;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5vw;
+  border-color: var(--strong-color);
+  margin-top: 1vw;
+  margin-bottom: 1vw;
 }
-#text_answer
-{
-	font-size: 1.5vw;
-	width: 100%;
+#text_answer {
+  /* Make sure the text area has a correct width */
+  display: inline-block;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+
+  padding: 0.5vw 1.5vw 0 1.5vw;
+  border-color: var(--strong-color);
+  border-radius: 5vw;
+  border-width: 3px;
+
+  text-align: center;
+  vertical-align: bottom;
+  resize: none;
 }
 #quiz_div
 {
-	padding: 1vw;
-	border-radius: 1vw;
-	border-color: var(--strong-color);
-	border-style: solid;
+  padding: 1vw;
+  border-radius: 1vw;
+  border-color: var(--strong-color);
+  border-style: solid;
 }
 #submit_div
 {
@@ -79,8 +91,8 @@
 }
 #submit_answer
 {
-	align-items: center;
-	background-color: var(--strong-color);
+  align-items: center;
+  background-color: var(--strong-color);
   color: white;
   padding: 1.5vw;
   font-size: 16px;
@@ -96,36 +108,36 @@
 }
 
 /* Direction buttons */
-#direction_buttons
-{
- display: table;
- width: 100%;
- padding-top: 1vw;
-}
-#direction_buttons li
-{
-  display: table-cell;
+.direction-buttons {
+  background-color: inherit;
+  width: inherit;
   text-align: center;
-  width: 50%;
+  margin: 20px 0 10px 0;
 }
-.direction-buttons
-{
+
+.direction-buttons:hover {
+  background-color: inherit;
+  cursor: inherit;
+}
+
+.direction-buttons button {
+  display: inline-block;
   background-color: var(--strong-color);
   color: white;
   padding: 1vw;
   font-size: 16px;
   border: none;
-  cursor: pointer;
-  display: auto;
   border-radius: 1vw;
-  width: 100%;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: 30%;
 }
-.direction-buttons:hover, .direction-buttons:focus
-{
+
+.direction-buttons button:hover {
   background-color: var(--weak-color);
 }
-.direction-buttons:disabled
-{
+
+.direction-buttons button:disabled {
   background-color: var(--weaker-color);
   cursor: default;
 }

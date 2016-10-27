@@ -18,6 +18,16 @@
   cursor: default;
 }
 
+/* Wrapper */
+.jlpt-wrapper, .jlpt-wrapper button, .jlpt-wrapper input[type=submit] {
+  font-family: Work Sans, "Helvetica Neue", Helvetica, Aria, sans-serif;
+}
+
+.jlpt-wrapper button {
+  font-family: Work Sans, "Helvetica Neue", Helvetica, Aria, sans-serif;
+}
+
+/* Buttons */
 #jlpt_buttons
 {
  display: table;

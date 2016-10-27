@@ -11,7 +11,7 @@
   <div class='header'><%= render "layouts/header" %></div>
   <script src="/assets/javascripts/jlpt_vocabulary.js"></script>
   <script src="/assets/javascripts/wanakana.min.js"></script>
-  <div class='wrapper'>
+  <div class='wrapper jlpt-wrapper'>
     <header class="post-header">
       <center><h1 class="post-title">JLPT</h1></center>
     </header>
@@ -26,15 +26,13 @@
       <li><button id='n4_button' class='nice-buttons' onclick='setLevel(4)'>N4</button></li>
       <li><button id='n5_button' class='nice-buttons' disabled onclick='setLevel(5)'>N5</button></li>
       </ui>
-      <br>
       <div id='question_num'>Question 01</div>
       <div id='question_div'></div>
-      <textarea id='text_answer' autofocus class='answer_input' placeholder='Type romaji normaly!'></textarea>
-      <br>
-      <ui id='direction_buttons'>
-        <li><button id='previous_button' class='direction-buttons' disabled onclick="setQuestion(-1)">PREVIOUS</button></li>
-        <li><button id='next_button' class='direction-buttons' onclick="setQuestion(1)">NEXT</button></li>
-      </ui>
+      <textarea id='text_answer' autofocus class='answer_input' placeholder='Type in romaji to convert to kana'></textarea>
+      <div class='direction-buttons'>
+        <button id='previous_button' disabled onclick="setQuestion(-1)">Previous</button>
+        <button id='next_button' onclick="setQuestion(1)">Next</button>
+      </div>
       <div id='submit_div'>
         <input id='submit_answer' class='answer_submit' type="submit" value="SUBMIT" onclick="submitAnswer()">
       </div>
